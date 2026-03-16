@@ -1,0 +1,18 @@
+# Derleme çıktıları
+test_temel
+test_temel.exe
+test_bellek
+test_bellek.exe
+benchmark
+benchmark.exe
+ministream.so
+ministream.dll
+data/uretec
+data/uretec.exe
+
+# Büyük veri dosyaları — repo'ya ekleme, yerel olarak üret veya Kaggle'dan indir
+data/*.csv
+
+# Kaggle kimlik bilgileri
+kaggle.json
+.kaggle/
