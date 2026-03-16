@@ -21,6 +21,19 @@ benchmark: $(SRC) test/benchmark.c
 ministream.so: $(SRC)
 	$(CC) -shared -fPIC $(CFLAGS) $(SRC) -o ministream.so
 
+# --- Veri ---
+
+# Sentetik veri: Kaggle olmadan 100 000 şarkı üretir (data/sarkilar.csv)
+veri: data/uretec
+	./data/uretec 100000
+
+data/uretec: data/uretec.c
+	$(CC) $(CFLAGS) data/uretec.c -o data/uretec
+
+# Gerçek veri: Kaggle API ile indir (kaggle CLI + token gerekir)
+kaggle-veri:
+	bash scripts/download_data.sh
+
 # --- Test ve Temizlik ---
 test: test_temel test_bellek
 	./test_temel
@@ -30,4 +43,4 @@ valgrind: test_temel
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./test_temel
 
 clean:
-	rm -f test_temel test_bellek benchmark ministream.so test_temel.exe test_bellek.exe benchmark.exe
+	rm -f test_temel test_bellek benchmark ministream.so test_temel.exe test_bellek.exe benchmark.exe data/uretec data/uretec.exe
